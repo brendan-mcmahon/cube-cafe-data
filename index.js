@@ -3,12 +3,12 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   try {
-    const { name, date, game } = event;
+    const { saveName, date, game } = event;
     
     const params = {
-      TableName: 'CubeCafeData',
+      TableName: 'cube-cafe-data',
       Item: {
-        name: name,
+        name: saveName,
         date: date,
         game: game
       }
@@ -22,18 +22,18 @@ exports.handler = async (event) => {
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST'
+        'Access-Control-Allow-Methods': 'POST, GET'
       }
     };
   } catch (error) {
     console.error('Error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Error occurred while saving data' }),
+      body: JSON.stringify({ message: 'Error occurred while saving data', error }),
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST'
+        'Access-Control-Allow-Methods': 'POST, GET'
       }
     };
   }
