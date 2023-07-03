@@ -3,7 +3,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   try {
-    const body = JSON.parse(body);
+    const body = JSON.parse(event.body);
     console.info("Event:", body);
     const { saveName, date, game } = body;
 
