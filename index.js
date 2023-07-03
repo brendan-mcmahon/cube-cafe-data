@@ -7,8 +7,11 @@ exports.handler = async (event) => {
     const { saveName, date, game } = event.body;
 
     console.info("saveName:", saveName);
+    console.info("event.body.saveName:", event.body.saveName);
     console.info("date:", date);
+    console.info("event.body.date:", event.body.date);
     console.info("game:", game);
+    console.info("event.body.game:", event.body.game);
 
     if (!saveName) {
       return {
