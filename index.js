@@ -40,6 +40,7 @@ exports.handler = async (event) => {
           "Access-Control-Allow-Methods": "POST, GET",
         },
       };
+    }
 
     const params = {
       TableName: "cube-cafe-data",
