@@ -9,7 +9,7 @@ exports.handler = async (event) => {
     if (!saveName) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameter saveName: ${event.saveName}` }),
+        body: JSON.stringify({ message: `Missing required parameter saveName: ${event.body.saveName}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
@@ -21,7 +21,7 @@ exports.handler = async (event) => {
     if (!date) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${event.date}` }),
+        body: JSON.stringify({ message: `Missing required parameters: ${event.body.date}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
@@ -33,7 +33,7 @@ exports.handler = async (event) => {
     if (!game) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${event.game}` }),
+        body: JSON.stringify({ message: `Missing required parameters: ${event.body.game}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
