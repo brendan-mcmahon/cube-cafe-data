@@ -3,20 +3,21 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   try {
-    console.info("Event:", event.body);
-    const { saveName, date, game } = event.body;
+    const body = JSON.parse(body);
+    console.info("Event:", body);
+    const { saveName, date, game } = body;
 
     console.info("saveName:", saveName);
-    console.info("event.body.saveName:", event.body.saveName);
+    console.info("body.saveName:", body.saveName);
     console.info("date:", date);
-    console.info("event.body.date:", event.body.date);
+    console.info("body.date:", body.date);
     console.info("game:", game);
-    console.info("event.body.game:", event.body.game);
+    console.info("body.game:", body.game);
 
     if (!saveName) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameter saveName: ${event.body.saveName}` }),
+        body: JSON.stringify({ message: `Missing required parameter saveName: ${body.saveName}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
@@ -28,7 +29,7 @@ exports.handler = async (event) => {
     if (!date) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${event.body.date}` }),
+        body: JSON.stringify({ message: `Missing required parameters: ${body.date}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
@@ -40,7 +41,7 @@ exports.handler = async (event) => {
     if (!game) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${event.body.game}` }),
+        body: JSON.stringify({ message: `Missing required parameters: ${body.game}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
