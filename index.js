@@ -6,6 +6,10 @@ exports.handler = async (event) => {
     console.info("Event:", event.body);
     const { saveName, date, game } = event.body;
 
+    console.info("saveName:", saveName);
+    console.info("date:", date);
+    console.info("game:", game);
+
     if (!saveName) {
       return {
         statusCode: 400,
