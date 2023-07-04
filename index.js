@@ -4,20 +4,12 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    console.info("Event:", body);
-    const { saveName, date, game } = body;
+    const { name, date, game } = body;
 
-    console.info("saveName:", saveName);
-    console.info("body.saveName:", body.saveName);
-    console.info("date:", date);
-    console.info("body.date:", body.date);
-    console.info("game:", game);
-    console.info("body.game:", body.game);
-
-    if (!saveName) {
+    if (!name) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameter saveName: ${body.saveName}` }),
+        body: JSON.stringify({ message: `Missing required parameter name: ${body.name}` }),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "Content-Type",
@@ -53,7 +45,7 @@ exports.handler = async (event) => {
     const params = {
       TableName: "cube-cafe-data",
       Item: {
-        name: saveName,
+        name: name,
         date: date,
         game: game,
       },
