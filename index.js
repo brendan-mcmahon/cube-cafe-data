@@ -4,52 +4,18 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    const { name, date, game } = body;
-
-    if (!name) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameter name: ${body.name}` }),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "POST, GET",
-        },
-      };
-    }
-
-    if (!date) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${body.date}` }),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "POST, GET",
-        },
-      };
-    }
-
-    if (!game) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ message: `Missing required parameters: ${body.game}` }),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "POST, GET",
-        },
-      };
-    }
+    console.log('body: ', body);
+    const { id, user, name, date, game } = body;
+    console.log(`id: ${id}`);
+    console.log(`user: ${user}`);
+    console.log(`name: ${name}`);
 
     const params = {
       TableName: "cube-cafe-data",
-      Item: {
-        name: name,
-        date: date,
-        game: game,
-      },
+      Item: { id, user, name, date, game },
     };
+
+    console.log('params', params);
 
     await dynamoDB.put(params).promise();
 
